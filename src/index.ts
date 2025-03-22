@@ -1,10 +1,11 @@
+import "dotenv/config";
 import { Client } from "pg";
 
 const pgCLient = new Client({
-  user: "neondb_owner",
-  password: "npg_QNIUMO6ms8JZ",
+  user: process.env.NEONDB_OWNER,
+  password: process.env.NEONDB_PASSWORD,
   port: 5432,
-  host: "ep-sparkling-sunset-a12q7qcb-pooler.ap-southeast-1.aws.neon.tech",
+  host: process.env.NEONDB_HOST,
   database: "neondb",
   ssl: true,
 });
