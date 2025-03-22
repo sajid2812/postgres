@@ -6,10 +6,13 @@ const pgCLient = new Client({
   port: 5432,
   host: "ep-sparkling-sunset-a12q7qcb-pooler.ap-southeast-1.aws.neon.tech",
   database: "neondb",
+  ssl:true
 });
 
 async function connectDB() {
   await pgCLient.connect();
+  const response = await pgCLient.query("SELECT * FROM users;");
+  console.log(response.rows);
 }
 
 connectDB();
