@@ -18,7 +18,8 @@ async function connectDB() {
     "sajid@gmail.com",
     "12345",
   ]);
-  console.log(response.rows);
+  const users = await pgCLient.query("SELECT * FROM users");
+  console.log(users.rows);
 }
 
 connectDB();
