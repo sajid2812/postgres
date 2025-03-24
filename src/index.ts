@@ -6,7 +6,7 @@ const pgCLient = new Client({
   password: process.env.NEONDB_PASSWORD,
   port: 5432,
   host: process.env.NEONDB_HOST,
-  database: "neondb",
+  database: process.env.DATABASE,
   ssl: true,
 });
 
