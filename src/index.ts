@@ -13,8 +13,11 @@ const pgCLient = new Client({
 async function connectDB() {
   await pgCLient.connect();
   const insertQuery = `INSERT INTO users {username, email, password} VALUES {$1, $2, $3}`;
-  await pgCLient.query("UPDATE users SET username='jiman' WHERE id=1");
-  const response = await pgCLient.query("SELECT * FROM users");
+  const response = await pgCLient.query(insertQuery, [
+    "Sajid",
+    "sajid@gmail.com",
+    "12345",
+  ]);
   console.log(response.rows);
 }
 
