@@ -20,7 +20,7 @@ app.post("/", async (req, res) => {
 app.put("/:id", async (req, res) => {
   await client.user.update({
     where: {
-      id: req.params.id as unknown as number,
+      id: parseInt(req.params.id),
     },
     data: {
       username: req.body.username,
@@ -31,10 +31,12 @@ app.put("/:id", async (req, res) => {
 app.get("/:id", async (req, res) => {
   const user = await client.user.findFirst({
     where: {
-      id: req.params.id as unknown as number,
+      id: parseInt(req.params.id),
     },
-    include: {
+    select: {
       todos: true,
+      username: true,
+      password: true,
     },
   });
   res.status(200).json(user);
