@@ -29,6 +29,9 @@ async function getUserDetails() {
     where: {
       id: 1,
     },
+    include: {
+      todos: true,
+    },
   });
   console.log(user);
 }
