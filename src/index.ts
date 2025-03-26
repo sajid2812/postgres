@@ -24,5 +24,15 @@ async function updateUser() {
   });
 }
 
+async function getUserDetails() {
+  const user = await client.user.findFirst({
+    where: {
+      id: 1,
+    },
+  });
+  console.log(user);
+}
+
 // createUser();
-updateUser();
+// updateUser();
+getUserDetails();
