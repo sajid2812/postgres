@@ -1,41 +1,41 @@
+import express from "express";
 import { PrismaClient } from "@prisma/client";
+
+const app = express();
 
 const client = new PrismaClient();
 
-async function createUser() {
+app.post("/", async (req, res) => {
+  const { username, password, age, city } = req.body;
   await client.user.create({
     data: {
-      username: "sajid",
-      password: "12345",
-      age: 24,
-      city: "Kolkata",
+      username: username,
+      password: password,
+      age: age,
+      city: city,
     },
   });
-}
+});
 
-async function updateUser() {
+app.put("/:id", async (req, res) => {
   await client.user.update({
     where: {
-      id: 1,
+      id: req.params.id as unknown as number,
     },
     data: {
-      username: "sajid2812",
+      username: req.body.username,
     },
   });
-}
+});
 
-async function getUserDetails() {
+app.get("/:id", async (req, res) => {
   const user = await client.user.findFirst({
     where: {
-      id: 1,
+      id: req.params.id as unknown as number,
     },
     include: {
       todos: true,
     },
   });
-  console.log(user);
-}
-
-// createUser();
-// updateUser();
-getUserDetails();
+  res.status(200).json(user);
+});
