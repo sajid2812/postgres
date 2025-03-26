@@ -46,3 +46,17 @@ app.post("/signup", async (req, res) => {
     });
   }
 });
+
+app.get("/:id", async (req, res) => {
+  try {
+    const id = req.params.id;
+    const query = `SELECT users.id, users.username, users.email, address.city, address.country, address.street, address.pincode FROM users JOIN address ON users.id = address.user_id WHERE users.id = $1;`;
+    const info = await pgCLient.query(query, [id]);
+    res.status(200).json(info.rows);
+  } catch (e) {
+    console.log(e);
+    res.status(400).json({
+      message: "Error while fetching info",
+    });
+  }
+});
