@@ -13,4 +13,16 @@ async function createUser() {
   });
 }
 
-createUser();
+async function updateUser() {
+  await client.user.update({
+    where: {
+      id: 1,
+    },
+    data: {
+      username: "sajid2812",
+    },
+  });
+}
+
+// createUser();
+updateUser();
